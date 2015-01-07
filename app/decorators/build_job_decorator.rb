@@ -19,6 +19,33 @@ class BuildJobDecorator < Draper::Decorator
     format '(%s)', h.number_to_human_size(build_file.file.size, precision: 2)
   end
 
+  def build_status
+    case aasm_state.to_sym
+    when :created
+      I18n.t('views.build_jobs.build_status.created')
+    when :unzipping
+      I18n.t('views.build_jobs.build_status.unzipping')
+    when :validating
+      I18n.t('views.build_jobs.build_status.validating')
+    when :installing_requirements
+      I18n.t('views.build_jobs.build_status.installing_requirements')
+    when :building
+      I18n.t('views.build_jobs.build_status.building')
+    when :zipping
+      I18n.t('views.build_jobs.build_status.unzipping')
+    when :transferring
+      I18n.t('views.build_jobs.build_status.transferring')
+    when :cleaning_up
+      I18n.t('views.build_jobs.build_status.cleaning_up')
+    when :failed
+      I18n.t('views.build_jobs.build_status.failed')
+    when :completed
+      I18n.t('views.build_jobs.build_status.completed')
+    else
+      fail "Invalid state #{aasm_state}"
+    end
+  end
+
   def build_file_content
     return if build_file.blank?
 

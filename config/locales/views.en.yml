@@ -28,5 +28,15 @@ en:
       show:
         text:
           running: This one will be just prepared for you.
+      build_status:
+        created: Created
+        unzipping: Unzipping Presentation Source File
+        validating: Validating Presentation
+        installing_requirements: Installing requirements
+        building: Building Presentation
+        transferring: Transferring Built Presentation
+        cleaning_up: Cleaning Up
+        failed: Failed
+        completed: Completed
 
 

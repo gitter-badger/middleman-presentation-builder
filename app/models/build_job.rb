@@ -5,52 +5,65 @@ class BuildJob < ActiveRecord::Base
   mount_uploader :source_file, SourceFileUploader
   mount_uploader :build_file, BuildFileUploader
 
-  aasm column: 'build_status' do
+  enum aasm_state: {
+    created: 1,
+    unzipping: 2,
+    validating: 3,
+    installing_requirements: 4,
+    building: 5,
+    zipping: 6,
+    transferring: 7,
+    cleaning_up: 8,
+    failed: 9,
+    completed: 10
+  }
+
+  aasm column: :aasm_state, enum: true do
     state :created, initial: true
-    state :unzipped, after_enter: :unzip_source_file
-    state :validated, after_enter: :validate_presentation
-    state :requirements_installed, after_enter: :install_requirements
-    state :built, after_enter: :build_presentation
-    state :zipped, after_enter: :zip_presentation
-    state :transferred, after_enter: :transfer_built_presentation
-    state :clean, after_enter: :cleanup_build_job
-    state :failure#, after_enter: :cleanup_build_job
+    state :unzipping, after_enter: :unzip_source_file
+    state :validating, after_enter: :validate_presentation
+    state :installing_requirements, after_enter: :install_requirements
+    state :building, after_enter: :build_presentation
+    state :zipping, after_enter: :zip_presentation
+    state :transferring, after_enter: :transfer_built_presentation
+    state :cleaning_up, after_enter: :cleanup_build_job
+    state :failed
     state :completed
 
     event :unzip do
-      transitions from: :created, to: :unzipped
+      transitions from: :created, to: :unzipping
     end
 
     event :validate do
-      transitions from: :unzipped, to: :validated
+      transitions from: :unzipping, to: :validating
     end
 
     event :install do
-      transitions from: :validated, to: :requirements_installed
+      transitions from: :validating, to: :installing_requirements
     end
 
     event :build do
-      transitions from: :requirements_installed, to: :built
+      transitions from: :installing_requirements, to: :building
     end
 
     event :zip do
-      transitions from: :built, to: :zipped
+      transitions from: :building, to: :zipping
     end
 
     event :transfer do
-      transitions from: :zipped, to: :transferred
+      transitions from: :zipping, to: :transferring
     end
 
     event :cleanup do
-      transitions from: :transferred, to: :clean
+      transitions from: :transferring, to: :cleaning_up
     end
 
     event :finish do
-      transitions from: :clean, to: :completed
+      transitions from: :cleaning_up, to: :completed
     end
 
     event :error_occured do
-      transitions to: :failure
+      transitions to: :failed
     end
 
     event :restart do

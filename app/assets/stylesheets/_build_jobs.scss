@@ -61,6 +61,14 @@
   justify-content: center;
 }
 
+.fe-build_job-overview-items {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
 .fe-build_job-overview-row {
   display: flex;
   flex-direction: row;
