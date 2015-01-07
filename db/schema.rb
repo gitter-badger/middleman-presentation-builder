@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101075929) do
+ActiveRecord::Schema.define(version: 20150107062559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150101075929) do
     t.string   "build_file"
     t.boolean  "add_static_servers", default: true
     t.string   "callback_url"
-    t.string   "aasm_state"
+    t.string   "build_status"
     t.string   "working_directory"
   end
 

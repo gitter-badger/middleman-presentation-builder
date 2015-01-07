@@ -20,7 +20,7 @@
     %i.fe-build_job-image-build_status
     %h1
       = BuildJob.human_attribute_name 'build_status'
-    = @build_job.aasm_state
+    = @build_job.build_status
   %li.fe-show-field
     %i.fe-build_job-image-source_file
     %h1

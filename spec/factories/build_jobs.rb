@@ -7,7 +7,7 @@ FactoryGirl.define do
     build_file nil
     add_static_servers true
     callback_url nil
-    aasm_state :created
+    build_status :created
     working_directory Dir.mktmpdir
   end
 end

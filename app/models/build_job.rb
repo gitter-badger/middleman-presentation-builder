@@ -5,7 +5,7 @@ class BuildJob < ActiveRecord::Base
   mount_uploader :source_file, SourceFileUploader
   mount_uploader :build_file, BuildFileUploader
 
-  aasm do
+  aasm column: 'build_status' do
     state :created, initial: true
     state :unzipped, after_enter: :unzip_source_file
     state :validated, after_enter: :validate_presentation
