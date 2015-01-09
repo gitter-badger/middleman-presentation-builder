@@ -29,6 +29,7 @@
     "open-sans": ">= 1.1.0",
     "inconsolata": "latest",
     "modernizr": "latest",
-    "lite-uploader": "latest"
+    "lite-uploader": "latest",
+    "jquery-ujs": "latest"
   }
 }

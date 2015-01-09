@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require jquery-ujs
 //= require turbolinks
 //= require bootstrap-sass-official/assets/javascripts/bootstrap-sprockets
 //= require browser_details
