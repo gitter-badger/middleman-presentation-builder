@@ -4,7 +4,7 @@ class UnzipSourceFileJob < ActiveJob::Base
   def perform(build_job)
     build_job.start_time = Time.now
 
-    fail if build_job.source_file.blank? || build_job.source_file.file.blank?
+    fail 'No source file was uploaded' if build_job.source_file.blank? || build_job.source_file.file.blank?
 
     zip_file = build_job.source_file.file.file
 
