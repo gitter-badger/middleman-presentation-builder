@@ -32,7 +32,7 @@ class BuildJobDecorator < Draper::Decorator
     when :building
       I18n.t('views.build_jobs.build_status.building')
     when :zipping
-      I18n.t('views.build_jobs.build_status.unzipping')
+      I18n.t('views.build_jobs.build_status.zipping')
     when :transferring
       I18n.t('views.build_jobs.build_status.transferring')
     when :cleaning_up

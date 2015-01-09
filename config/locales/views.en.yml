@@ -31,6 +31,7 @@ en:
       build_status:
         created: Created
         unzipping: Unzipping Presentation Source File
+        zipping: Zipping Built Presentation
         validating: Validating Presentation
         installing_requirements: Installing requirements
         building: Building Presentation
