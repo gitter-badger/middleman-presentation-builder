@@ -24,18 +24,20 @@
     %h1
       = BuildJob.human_attribute_name 'build_status'
     = @build_job.build_status
-  %li.fe-show-field
-    %i.fe-build_job-image-source_file
-    %h1
-      = BuildJob.human_attribute_name 'source_file'
-    = link_to BuildJob.human_attribute_name('source_file'), @build_job.source_file.url
-    = @build_job.build_file_size
-  %li.fe-show-field
-    %i.fe-build_job-image-build_file
-    %h1
-      = BuildJob.human_attribute_name 'build_file'
-    = link_to BuildJob.human_attribute_name('build_file'), @build_job.build_file.url
-    = @build_job.build_file_size
+  - unless @build_job.source_file.blank?
+    %li.fe-show-field
+      %i.fe-build_job-image-source_file
+      %h1
+        = BuildJob.human_attribute_name 'source_file'
+      = link_to BuildJob.human_attribute_name('source_file'), @build_job.source_file.url
+      = @build_job.source_file_size
+  - unless @build_job.source_file.blank?
+    %li.fe-show-field
+      %i.fe-build_job-image-build_file
+      %h1
+        = BuildJob.human_attribute_name 'build_file'
+      = link_to BuildJob.human_attribute_name('build_file'), @build_job.build_file.url
+      = @build_job.build_file_size
 %ul.fe-item-details
   %li.fe-show-field.fe-show-field-blank
     %h1
