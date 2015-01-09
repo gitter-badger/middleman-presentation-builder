@@ -18,6 +18,7 @@ class TransferBuiltPresentationJob < ActiveJob::Base
   rescue => err
     Rails.logger.fatal "Error occured while transferring presentation: #{err.message}\n#{err.backtrace.join("\n")}"
     build_job.progress[:transferring] = false
+    build_job.stop_time = Time.now
     build_job.error_occured!
   end
 end

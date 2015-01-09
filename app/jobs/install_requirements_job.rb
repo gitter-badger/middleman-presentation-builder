@@ -26,6 +26,7 @@ class InstallRequirementsJob < ActiveJob::Base
   rescue => err
     Rails.logger.fatal "Build Job failed with #{err.message}\n\n#{err.backtrace.join("\n")}"
     build_job.progress[:installing_requirements] = false
+    build_job.stop_time = Time.now
     build_job.error_occured!
   end
 end

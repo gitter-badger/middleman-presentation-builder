@@ -21,6 +21,7 @@ class ZipPresentationJob < ActiveJob::Base
   rescue => err
     Rails.logger.fatal "Error occured while creating ZIP-file \"#{zip_file}\": #{err.message}\n#{err.backtrace.join("\n")}"
     build_job.progress[:zipping] = false
+    build_job.stop_time = Time.now
     build_job.error_occured!
   end
 end

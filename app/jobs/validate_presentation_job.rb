@@ -14,6 +14,7 @@ class ValidatePresentationJob < ActiveJob::Base
   rescue => err
     Rails.logger.fatal "Error occured while validating \"#{build_job.source_file.file.file}\": #{err.message}\n\n#{err.backtrace.join("\n")}"
     build_job.progress[:validating] = false
+    build_job.stop_time = Time.now
     build_job.error_occured!
   end
 
