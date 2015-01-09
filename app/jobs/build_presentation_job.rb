@@ -18,8 +18,6 @@ class BuildPresentationJob < ActiveJob::Base
       cmd_str << '--add-static-servers=false'
     end
 
-    build_job.start_time = Time.now
-
     cmd = nil
     Timeout::timeout(Rails.configuration.x.build_timeout) do
       cmd = MiddlemanPresentationBuilder::Command.new(cmd_str.join(' '), working_directory: directory_with_config)
@@ -33,9 +31,12 @@ class BuildPresentationJob < ActiveJob::Base
 
     fail "Command \"#{command.to_s}\" failed. See output for more details" unless cmd.success?
 
+    build_job.progress[:building] = true
+
     build_job.zip! build_job
   rescue => err
     Rails.logger.fatal "Build Job failed with #{err.message}\n\n#{err.backtrace.join("\n")}"
+    build_job.progress[:building] = false
     build_job.stop_time = Time.now
     build_job.error_occured!
   end

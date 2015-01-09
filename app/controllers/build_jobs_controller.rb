@@ -31,11 +31,16 @@ class BuildJobsController < ApplicationController
   def create
     @build_job = BuildJob.new(build_job_params)
 
+    @build_job.class.aasm.states.dup.delete_if { |s| %w(created completed failed) }.each do |s|
+      @build_job.progress[s.name] = nil
+    end
+
     @build_job.source_file = params['build_job']['source_file']
     @build_job.add_static_servers = params['build_job']['add_static_servers'] == "1" ? true : false
     @build_job.callback_url = params['build_job']['callback_url']
     @build_job.working_directory = Dir.mktmpdir('presentation')
     @build_job.save!
+
     @build_job.unzip!(@build_job)
 
     respond_to do |format|

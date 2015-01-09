@@ -1,24 +1,16 @@
 class BuildJob < ActiveRecord::Base
   include AASM
 
+
+  store :progress
+
   belongs_to :build_status
   mount_uploader :source_file, SourceFileUploader
   mount_uploader :build_file, BuildFileUploader
 
-  enum aasm_state: {
-    created: 1,
-    unzipping: 2,
-    validating: 3,
-    installing_requirements: 4,
-    building: 5,
-    zipping: 6,
-    transferring: 7,
-    cleaning_up: 8,
-    failed: 9,
-    completed: 10
-  }
+  has_one :build_progress
 
-  aasm column: :aasm_state, enum: true do
+  aasm do
     state :created, initial: true
     state :unzipping, after_enter: :unzip_source_file
     state :validating, after_enter: :validate_presentation
@@ -106,4 +98,5 @@ class BuildJob < ActiveRecord::Base
   def cleanup_build_job
     CleanupBuildJob.perform_later(self)
   end
+
 end

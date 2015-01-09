@@ -88,7 +88,7 @@ gem 'formtastic'
 
 gem 'lograge'
 gem 'browser_details'
-gem 'geo_pattern'
+gem 'geo_pattern', git: 'https://github.com/jasonlong/geo_pattern.git'
 gem 'fedux_org-stdlib', '~> 0.11.8', require: false
 gem 'ruby-filemagic'
 gem 'faraday'
@@ -97,4 +97,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'pg'
 gem 'middleman-presentation-helpers', '~> 0.16.rc1', require: false
-gem 'gibson'
+gem 'refile'
+gem 'pry-rails'
+# gem 'cells'
+# gem 'rspec-cells'

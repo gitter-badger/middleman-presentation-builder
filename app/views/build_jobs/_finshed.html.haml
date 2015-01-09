@@ -1,5 +1,8 @@
 %h1
   = @build_job.title
+
+= render partial: 'shared/progress/build_job', object: @build_job
+
 %ul.fe-item-details
   %li.fe-show-field
     %i.fe-build_job-image-start_time

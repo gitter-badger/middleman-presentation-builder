@@ -1,0 +1,13 @@
+%ul.fe-progress
+  - build_job.progress.each do |key, value|
+    %li.fe-progress-item
+      %span.fe-build_job-progress-status-name
+        = build_job.build_status key.to_sym
+      - if value == true
+        %i.fe-icon.fe-icon-start.fe-icon-color-grey.fe-icon-absolute-normaler.fe-icon-build_job-progress-passed
+      - elsif value == false
+        %i.fe-icon.fe-icon-start.fe-icon-color-grey.fe-icon-absolute-normaler.fe-icon-build_job-progress-failed
+      - else
+        %i.fe-icon.fe-icon-start.fe-icon-color-grey.fe-icon-absolute-normaler.fe-icon-build_job-progress-not_run
+    - unless key.equal? build_job.progress.keys.last
+      %i.fe-icon.fe-icon-start.fe-icon-color-grey.fe-icon-build_job-progress-next

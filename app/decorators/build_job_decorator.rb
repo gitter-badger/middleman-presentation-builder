@@ -19,8 +19,8 @@ class BuildJobDecorator < Draper::Decorator
     format '(%s)', h.number_to_human_size(build_file.file.size, precision: 2)
   end
 
-  def build_status
-    case aasm_state.to_sym
+  def build_status(status = aasm_state.to_sym)
+    case status
     when :created
       I18n.t('views.build_jobs.build_status.created')
     when :unzipping

@@ -35,6 +35,8 @@
   flex-direction: row;
   list-style: none;
   flex-wrap: wrap;
+  margin: 0px;
+  padding: 0px;
 }
 
 .fe-show-field {
@@ -134,4 +136,33 @@
 
 .fe-show-field a:hover {
   color: $fe-color-black;
+}
+
+.fe-progress {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0px;
+  align-items: center;
+}
+
+.fe-progress-item {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  align-items: center;
+  text-align: center;
+  border: 1px solid $fe-color-grey-lighter;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  min-height: 75px;
+  padding: 5px;
+}
+
+.fe-build_job-progress-status-name {
+  display: flex;
+  flex:1;
 }

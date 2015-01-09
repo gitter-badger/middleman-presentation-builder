@@ -8,9 +8,12 @@ class ValidatePresentationJob < ActiveJob::Base
     test has_middleman_gem_in_gemfile?(build_job.working_directory), 'No middleman gem in Gemfile'
     test has_middleman_config_file?(build_job.working_directory), 'No middleman config file'
 
+    build_job.progress[:validating] = true
+
     build_job.install! build_job
   rescue => err
     Rails.logger.fatal "Error occured while validating \"#{build_job.source_file.file.file}\": #{err.message}\n\n#{err.backtrace.join("\n")}"
+    build_job.progress[:validating] = false
     build_job.error_occured!
   end
 

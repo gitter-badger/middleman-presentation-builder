@@ -210,3 +210,22 @@ i.fe-icon-start {
   flex: 0 0 auto;
 }
 
+.fe-icon-build_job-progress-not_run:before {
+  // fa-circle-o
+  content: "\f10c";
+}
+
+.fe-icon-build_job-progress-passed:before {
+  // fa-check-circle-o
+  content: "\f05d";
+}
+
+.fe-icon-build_job-progress-failed:before {
+  //  fa-times-circle-o
+  content: "\f05c";
+}
+
+.fe-icon-build_job-progress-next:before {
+  //  fa-long-arrow-right
+  content: "\f178";
+}

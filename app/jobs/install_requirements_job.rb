@@ -21,9 +21,11 @@ class InstallRequirementsJob < ActiveJob::Base
 
     fail "Command \"#{command.to_s}\" failed. See output for more details" unless cmd.success?
 
+    build_job.progress[:installing_requirements] = true
     build_job.build! build_job
   rescue => err
     Rails.logger.fatal "Build Job failed with #{err.message}\n\n#{err.backtrace.join("\n")}"
+    build_job.progress[:installing_requirements] = false
     build_job.error_occured!
   end
 end
